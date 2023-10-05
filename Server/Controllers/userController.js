@@ -1,7 +1,7 @@
 const UserModel = require("../Models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sendMail = require("../Helpers/sendMail");
+
 
 // to register user
 exports.registerUser =   async(req, res) =>{
@@ -13,8 +13,6 @@ exports.registerUser =   async(req, res) =>{
         const newUser = await UserModel({...req.body, password:hashedPassword});
 
         await newUser.save();
-        //sending mail to user
-        sendMail(email, "Welcome to Our Ecommerce Project", `Hi, ${name} Thank you for registering! we wish you'd like our Website.`);
 
         res.status(200).send({msg:"User Registerd Succesfully"});
 
